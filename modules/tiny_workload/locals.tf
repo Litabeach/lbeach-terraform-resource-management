@@ -1,5 +1,5 @@
 locals {
-  prefix            = "${var.owner}-${var.assignment}-${var.lifespan}-${var.environment}"
+  prefix            = "${var.owner}-${var.assignment}-${var.lifespan}"
   restricted_prefix = replace(local.prefix, "/-/", "")
 
   tags = {

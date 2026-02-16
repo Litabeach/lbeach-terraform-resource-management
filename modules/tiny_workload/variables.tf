@@ -29,3 +29,8 @@ variable "release" {
   description = "Used for Assignment 3 to demonstrate promotion-by-change"
   default     = "0"
 }
+
+variable "subscription_id" {
+  type      = string
+  sensitive = true
+}
