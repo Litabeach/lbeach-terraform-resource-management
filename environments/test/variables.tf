@@ -10,12 +10,13 @@ variable "owner" {
 
 variable "assignment" {
   type        = string
-  default = "asg1"
+  default = "asg2"
 }
 
 variable "environment" {
   type        = string
   description = "The environment (e.g., dev or test)"
+  default = "test"
 }
 
 variable "location" {
