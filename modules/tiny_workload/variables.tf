@@ -11,6 +11,5 @@ variable "location" {
 variable "release" {
   type        = string
   description = "Used for Assignment 3 to demonstrate promotion-by-change"
-  default     = "0"
 }
 
