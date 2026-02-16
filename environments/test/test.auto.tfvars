@@ -1,5 +1,5 @@
 owner      = "lbeach"
 lifespan = "temp"
 environment = "test"
-assingment = "asg2"
-release = "0"
+assignment = "asg2"
+release = "1"

@@ -4,4 +4,5 @@ module "tiny_workload" {
   restricted_resource_naming_prefix = local.restricted_resource_naming_prefix
   location               = var.location
   tags                   = local.tags
-}
+  release = var.release
+} 
