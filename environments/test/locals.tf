@@ -7,5 +7,6 @@ locals {
     owner       = var.owner
     environment = var.environment
     lifespan    = var.lifespan
+    assignment = var.assignment
   }
 }

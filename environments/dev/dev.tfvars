@@ -1,3 +1,4 @@
 owner      = "lbeach"
-assignment = "assignment"
+assignment = "asg1"
 environment = "dev"
+lifespan = "temp"
