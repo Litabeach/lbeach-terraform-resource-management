@@ -1,0 +1,8 @@
+# Create Resource Group
+az group create --name lbeach-assignment1-temp-rg-01 --location centralus
+
+# Create Storage Account (Must be globally unique)
+az storage account create --name lbeacha1tempsa01 --resource-group lbeach-assignment1-temp-rg-01 --sku Standard_LRS --encryption-services blob
+
+# Create Container
+az storage container create --name tfstate-container --account-name lbeacha1tempsa01 --auth-mode login
