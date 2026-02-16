@@ -1,4 +1,30 @@
-variable "lifespan" { type = string }
-variable "environment" { type = string }
-variable "owner" { type = string }
-variable "assignment" {type = string}
+variable "lifespan" {
+  type        = string
+  default = "temp"
+}
+
+variable "owner" {
+  type        = string
+  default = "lbeach"
+}
+
+variable "assignment" {
+  type        = string
+  default = "asg1"
+}
+
+variable "environment" {
+  type        = string
+  description = "The environment (e.g., dev or test)"
+}
+
+variable "location" {
+  type        = string
+  default     = "Central US"
+}
+
+variable "release" {
+  type        = string
+  description = "Used for Assignment 3 to demonstrate promotion-by-change"
+  default     = "0"
+}

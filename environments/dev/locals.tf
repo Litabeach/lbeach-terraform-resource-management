@@ -1,11 +1,12 @@
 locals {
-  location          = "centralus"
   prefix            = "${var.owner}-${var.assignment}-${var.lifespan}-${var.environment}"
   restricted_prefix = replace(local.prefix, "/-/", "")
 
-  common_tags = {
+  tags = {
     owner       = var.owner
     environment = var.environment
     lifespan    = var.lifespan
+    assignment = var.assignment
+    release = var.release
   }
 }
