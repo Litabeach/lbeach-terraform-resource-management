@@ -1,12 +1,12 @@
-# locals {
-#   location          = "centralus"
-#   prefix            = "${var.owner}-${var.assignment}-${var.lifespan}-${var.environment}"
-#   restricted_prefix = replace(local.prefix, "/-/", "")
+locals {
+  resource_naming_prefix            = "${var.owner}-${var.assignment}-${var.lifespan}-${var.environment}"
+  restricted_resource_naming_prefix = replace(local.resource_naming_prefix, "/-/", "")
 
-#   common_tags = {
-#     owner       = var.owner
-#     environment = var.environment
-#     lifespan    = var.lifespan
-#     assignment = var.assignment
-#   }
-# }
+  tags = {
+    owner       = var.owner
+    environment = var.environment
+    lifespan    = var.lifespan
+    assignment  = var.assignment
+    release     = var.release
+  }
+}
