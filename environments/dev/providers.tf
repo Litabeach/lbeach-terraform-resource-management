@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "= 4.60.0" # Explicit pinning
+    }
+  }
+}
+
 provider "azurerm" {
   features {
         key_vault {
