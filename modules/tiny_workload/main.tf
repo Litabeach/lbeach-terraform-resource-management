@@ -23,3 +23,11 @@ resource "azurerm_storage_container" "tfstate" {
   storage_account_id = azurerm_storage_account.storage.id
   container_access_type = "private"
 }
+
+
+# imported secret
+resource "azurerm_key_vault_secret" "imported_secret" {
+  name         = "devpw"
+  value        = "potato" # Terraform will manage this value now
+  key_vault_id = "/subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg2-temp-test-rg-01/providers/Microsoft.KeyVault/vaults/lbeachasg5tempdevkv01"
+}
