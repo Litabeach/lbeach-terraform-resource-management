@@ -1,3 +1,5 @@
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_naming_prefix}-rg-01"
   location = var.location
@@ -24,10 +26,18 @@ resource "azurerm_storage_container" "tfstate" {
   container_access_type = "private"
 }
 
-
+  resource "azurerm_key_vault" "kv" {
+  name                       = "${var.restricted_resource_naming_prefix}kv01"
+  location                   = var.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  rbac_authorization_enabled = false
+}
+ 
 # imported secret
-resource "azurerm_key_vault_secret" "imported_secret" {
+resource "azurerm_key_vault_secret" "devpw" {
   name         = "devpw"
   value        = "potato" # Terraform will manage this value now
-  key_vault_id = "/subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg2-temp-test-rg-01/providers/Microsoft.KeyVault/vaults/lbeachasg5tempdevkv01"
+  key_vault_id = azurerm_key_vault.kv.id
 }

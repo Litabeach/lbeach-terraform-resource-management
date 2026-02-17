@@ -25,16 +25,36 @@ az keyvault secret set --vault-name lbeachasg5temptestkv01 --name "testpw" --val
 
 terraform import module.tiny_workload.azurerm_key_vault_secret.imported_secret https://lbeachasg5tempdevkv01.vault.azure.net/secrets/devpw
 
+erraform import module.tiny_workload.azurerm_storage_account.storage 
+
+
+asg 5 import
+ID = az group show --name lbeach-asg5-temp-dev-rg-01 --query id -o tsv
+az storage account show --name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01 --query id -o ts
+az keyvault secret show --name "db-password" --vault-name "kv-assessment-lbeach" --query id -o tsv | cut -d'/' -f1-5
+
+terraform init
+terraform import module.tiny_workload.azurerm_resource_group.rg /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg5-temp-dev-rg-01
+
+
+<!-- import rg -->
+
+terraform import module.tiny_workload.azurerm_resource_group.rg /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg5-temp-dev-rg-01
+
+<!-- import sa -->
+terraform import module.tiny_workload.azurerm_storage_account.storage /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg5-temp-dev-rg-01/providers/Microsoft.Storage/storageAccounts/lbeachasg5tempdevsa01
+
+<!-- import s container -->
+terraform import module.tiny_workload.azurerm_storage_container.tfstate /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg5-temp-dev-rg-01/providers/Microsoft.Storage/storageAccounts/lbeachasg5tempdevsa01/blobServices/default/containers/tfstatestoragecontainer
+
+<!-- import kv -->
+terraform import module.tiny_workload.azurerm_key_vault.kv /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg5-temp-dev-rg-01/providers/Microsoft.KeyVault/vaults/lbeachasg5tempdevkv01 
+
+<!-- import kv secret -->
+SECRET_ID=$(az keyvault secret show --name "devpw" --vault-name "lbeachasg5tempdevkv01" --query id -o tsv )
+
+terraform import module.tiny_workload.azurerm_key_vault_secret.devpw https://lbeachasg5tempdevkv01.vault.azure.net/secrets/devpw/90e0d07cc09d4aaab0998ed0abd5da18
 
 
 
-<!-- after creation, must import state for rg, sa and container
-ex :
-
-terraform import module.tiny_workload.azurerm_resource_group.rg /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg2-temp-test-rg-01
-
-terraform import module.tiny_workload.azurerm_storage_account.sa /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg2-temp-test-rg-01/providers/Microsoft.Storage/storageAccounts/lbeachasg2temptestsa01
-
-terraform import module.tiny_workload.azurerm_storage_container.tfstate /subscriptions/f4032010-05af-4abd-8c46-1f5b91077fbe/resourceGroups/lbeach-asg2-temp-test-rg-01/providers/Microsoft.Storage/storageAccounts/lbeachasg2temptestsa01/blobServices/default/containers/tfstatestoragecontainer
-
--->
+az storage account keys list --account-name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01
