@@ -10,7 +10,7 @@ variable "owner" {
 
 variable "assignment" {
   type    = string
-  default = "asg2"
+  default = "asg5"
 }
 
 variable "environment" {
