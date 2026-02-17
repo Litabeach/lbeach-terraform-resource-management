@@ -35,9 +35,39 @@ resource "azurerm_storage_container" "tfstate" {
   rbac_authorization_enabled = false
 }
  
-# imported secret
 resource "azurerm_key_vault_secret" "devpw" {
   name         = "devpw"
   value        = "potato" # Terraform will manage this value now
   key_vault_id = azurerm_key_vault.kv.id
+}
+
+resource "azurerm_service_plan" "app_service_plan" {
+  name                = "${var.resource_naming_prefix}-asp-01"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  os_type             = "Windows"
+  sku_name            = "S1"
+  tags                = var.tags
+}
+
+
+resource "azurerm_windows_web_app" "app" {
+  name                = "${var.resource_naming_prefix}-asp-01"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+  service_plan_id     = azurerm_service_plan.app_service_plan.id
+
+  app_settings = {
+    "ENV_NAME" = "Staging-v2"
+  }
+    site_config {}
+}
+
+resource "azurerm_windows_web_app_slot" "staging" {
+  name           = "staging"
+  app_service_id = azurerm_windows_web_app.app.id
+  app_settings = {
+    "ENV_NAME" = "Staging-v3"
+  }
+  site_config {}
 }

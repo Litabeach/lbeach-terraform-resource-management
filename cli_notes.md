@@ -58,3 +58,27 @@ terraform import module.tiny_workload.azurerm_key_vault_secret.devpw https://lbe
 
 
 az storage account keys list --account-name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01
+
+
+
+Assignment 6 - drift
+scenario 1:
+change - storage acount drift - network access 
+disable public access, change min tls version
+az storage account update --name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01 --min-tls-version TLS1_1 --public-network-access Disabled  
+
+add ip 
+az storage account network-rule add --resource-group lbeach-asg5-temp-dev-rg-01 --account-name lbeachasg5tempdevsa01 --ip-address 97.116.0.12
+
+scenario 2: 
+tagging (metadata) change
+
+
+
+assg 7 slot swap
+
+az webapp deployment slot swap \
+  --resource-group lbeach-asg5-temp-dev-rg-01 \
+  --name lbeach-asg7-app \
+  --slot staging \
+  --target-slot production
