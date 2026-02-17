@@ -48,6 +48,9 @@ resource "azurerm_service_plan" "app_service_plan" {
   os_type             = "Windows"
   sku_name            = "S1"
   tags                = var.tags
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 
