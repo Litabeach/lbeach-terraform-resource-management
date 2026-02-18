@@ -3,3 +3,7 @@ secrets.auto.tfvars
 .terraform
 
 cli_notes
+dev.auto.vars
+test.auto.vars
+
+

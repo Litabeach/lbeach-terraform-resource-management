@@ -31,6 +31,7 @@ resource "azurerm_storage_container" "tfstate" {
   container_access_type = "private"
 }
 
+
 #   resource "azurerm_key_vault" "kv" {
 #   name                       = "${var.restricted_resource_naming_prefix}kv01"
 #   location                   = var.location
