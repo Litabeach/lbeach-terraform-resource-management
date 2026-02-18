@@ -1,9 +1,16 @@
-secrets.auto.tfvars
 
 .terraform
 
 cli_notes
 dev.auto.vars
 test.auto.vars
+secrets.auto.tfvars
+
+
+# Terraform state files
 *.tfstate
+*.tfstate.*
+errored.tfstate
+
+backend_tfstate_diagram.png
 

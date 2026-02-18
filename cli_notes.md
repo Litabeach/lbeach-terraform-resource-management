@@ -12,6 +12,13 @@ az storage container create --name tfstate --account-name lbeachasg5tempdevsa01 
 az storage container create --name tfstate --account-name lbeachasg5temptestsa01 --auth-mode login
 
 
+# Show Container
+az storage blob show --name dev.tfstate --container-name tfstate --account-name lbeachasg5tempdevsa01 --auth-mode key
+az storage blob show --name dev.tfstate --container-name tfstate --account-name lbeachasg5temptestsa01 --auth-mode key
+
+# Container contents
+az storage blob download --name dev.tfstate --container-name tfstate --account-name lbeachasg5tempdevsa01 --auth-mode key
+
 # create key vault
 az keyvault create --name "lbeachasg5tempdevkv01" --resource-group "lbeach-asg5-temp-dev-rg-01" --location "CentralUS" --default-action Allow --enable-rbac-authorization false
 az keyvault create --name "lbeachasg5temptestkv01" --resource-group "lbeach-asg5-temp-test-rg-01" --location "CentralUS" --default-action Allow --enable-rbac-authorization false
@@ -69,13 +76,13 @@ import {
 
 az storage account keys list --account-name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01
 
-
+az webapp deployment slot swap -g "rg" -n "webappname" --slot webappslot --target-slot production
 
 Assignment 6 - drift
 scenario 1:
 change - storage acount drift - network access 
 disable public access, change min tls version
-az storage account update --name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01 --min-tls-version TLS1_1 --public-network-access Disabled  
+az storage account update --name lbeachasg5tempdevsa01 --resource-group lbeach-asg5-temp-dev-rg-01 --min-tls-version TLS1_1 --public-network-access Enabled 
 
 add ip 
 az storage account network-rule add --resource-group lbeach-asg5-temp-dev-rg-01 --account-name lbeachasg5tempdevsa01 --ip-address 97.116.0.12
@@ -92,3 +99,8 @@ az webapp deployment slot swap \
   --name lbeach-asg7-app \
   --slot staging \
   --target-slot production
+
+
+
+  <!-- assg part 1 notes:
+   in the future create one storage container for state w diff keys for dev and test -->
