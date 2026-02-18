@@ -10,12 +10,10 @@ variable "owner" {
 
 variable "assignment" {
   type    = string
-  default = "asg5"
 }
 
 variable "environment" {
   type        = string
-  description = "The environment (e.g., dev or test)"
   default     = "dev"
 }
 
@@ -26,7 +24,6 @@ variable "location" {
 
 variable "release" {
   type        = string
-  description = "Used for Assignment 3 to demonstrate promotion-by-change"
 }
 
 variable "subscription_id" {

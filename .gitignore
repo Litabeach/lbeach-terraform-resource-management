@@ -5,5 +5,5 @@ secrets.auto.tfvars
 cli_notes
 dev.auto.vars
 test.auto.vars
-
+*.tfstate
 
