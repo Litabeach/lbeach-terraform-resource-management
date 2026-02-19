@@ -17,7 +17,7 @@ This project utilizes a Modular Structure. Both dev and test environments call t
 
 Separate State: Managed via unique backend keys.
 
-Separate Inputs: Specific terraform.tfvars files for each environment define SKU sizes, instance counts, and naming conventions.
+Separate Inputs: Specific terraform.tfvars files for each environment define realese versions, environment, tags, and naming conventions.
 
 ### 3. Promotion Process
 Promotion is Code-Driven. To promote a release from Dev to Test:

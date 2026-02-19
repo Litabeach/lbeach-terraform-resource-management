@@ -7,19 +7,21 @@ module "tiny_workload" {
   release = var.release
 } 
 
-# Import resource group
+
+# ------------- Import Backend ---------------
+# rg
 import {
   to = module.tiny_workload.azurerm_resource_group.rg
   id = "/subscriptions/${var.subscription_id}/resourceGroups/${local.resource_naming_prefix}-rg-01"
 }
 
-# Import storage acct
+# storage 
 import {
   to = module.tiny_workload.azurerm_storage_account.storage
   id = "/subscriptions/${var.subscription_id}/resourceGroups/${local.resource_naming_prefix}-rg-01/providers/Microsoft.Storage/storageAccounts/${local.restricted_resource_naming_prefix}sa01"
 }
 
-#Import storage container
+# storage container
 import {
   to = module.tiny_workload.azurerm_storage_container.tfstate
   id = "/subscriptions/${var.subscription_id}/resourceGroups/${local.resource_naming_prefix}-rg-01/providers/Microsoft.Storage/storageAccounts/${local.restricted_resource_naming_prefix}sa01/blobServices/default/containers/tfstate"
